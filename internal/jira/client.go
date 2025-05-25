@@ -17,3 +17,11 @@ func NewClient(username string, token string, url string) *goJira.Client {
 
 	return jiraClient
 }
+
+func GetIssue(client *goJira.Client, issueKey string) (*goJira.Issue, error) {
+	issue, _, err := client.Issue.Get(issueKey, nil)
+	if err != nil {
+		return nil, err
+	}
+	return issue, nil
+}
