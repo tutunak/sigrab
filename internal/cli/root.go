@@ -5,7 +5,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/tutunak/sigrab/internal/config"
 	"github.com/tutunak/sigrab/internal/jira"
-	"github.com/tutunak/sigrab/utils"
+	"github.com/tutunak/sigrab/internal/utils"
 )
 
 var (
