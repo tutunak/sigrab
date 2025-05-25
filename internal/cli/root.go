@@ -5,12 +5,14 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/tutunak/sigrab/internal/config"
 	"github.com/tutunak/sigrab/internal/jira"
+	"github.com/tutunak/sigrab/utils"
 )
 
 var (
 	url  string
 	from string
 	to   string
+	path string
 )
 
 var rootCmd = &cobra.Command{
@@ -29,6 +31,7 @@ func init() {
 	rootCmd.Flags().StringVar(&url, "url", "", "Jira Cloud URL (required)")
 	rootCmd.Flags().StringVar(&from, "from", "", "Starting Jira issue key (e.g., DEV-123)")
 	rootCmd.Flags().StringVar(&to, "to", "", "Ending Jira issue key (e.g., DEV-140)")
+	rootCmd.Flags().StringVar(&path, "path", "", "Path to save the JSON file (default: current directory)")
 
 	rootCmd.MarkFlagRequired("url")
 
@@ -39,6 +42,8 @@ func runSigrab(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return fmt.Errorf("failed to load config: %w", err)
 	}
+
+	_ = utils.InitDir(path)
 
 	_ = jira.NewClient(cfg.UserEmail, cfg.APIToken, url)
 	return nil
