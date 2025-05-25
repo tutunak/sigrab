@@ -26,7 +26,7 @@ func (f *Fetcher) FetchBackward(to string, path string) error {
 		issueKey := fmt.Sprintf("%s-%d", prefix, current)
 		issue, err := GetIssue(f.client, issueKey)
 		if err != nil {
-			continue
+			panic(err)
 		}
 
 		writer := output.NewWriter()
