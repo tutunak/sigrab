@@ -20,6 +20,11 @@ var rootCmd = &cobra.Command{
 	RunE:  runSigrab,
 }
 
+// Execute runs the root command
+func Execute() error {
+	return rootCmd.Execute()
+}
+
 func init() {
 	rootCmd.Flags().StringVar(&url, "url", "", "Jira Cloud URL (required)")
 	rootCmd.Flags().StringVar(&from, "from", "", "Starting Jira issue key (e.g., DEV-123)")
