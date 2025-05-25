@@ -2,9 +2,9 @@ package cli
 
 import (
 	"fmt"
-	jira "github.com/andygrunwald/go-jira"
 	"github.com/spf13/cobra"
 	"github.com/tutunak/sigrab/internal/config"
+	"github.com/tutunak/sigrab/internal/jira"
 )
 
 var (
@@ -20,18 +20,21 @@ var rootCmd = &cobra.Command{
 	RunE:  runSigrab,
 }
 
+func init() {
+	rootCmd.Flags().StringVar(&url, "url", "", "Jira Cloud URL (required)")
+	rootCmd.Flags().StringVar(&from, "from", "", "Starting Jira issue key (e.g., DEV-123)")
+	rootCmd.Flags().StringVar(&to, "to", "", "Ending Jira issue key (e.g., DEV-140)")
+
+	rootCmd.MarkFlagRequired("url")
+
+}
+
 func runSigrab(cmd *cobra.Command, args []string) error {
-	_, err := config.LoadConfig()
+	cfg, err := config.LoadConfig()
 	if err != nil {
 		return fmt.Errorf("failed to load config: %w", err)
 	}
 
-	tp := jira.BasicAuthTransport{
-		Username: "<username>",
-		Password: "<api-token>",
-	}
-
-	client := jira.NewClient(url, cfg.APIToken)
-	fetcher := jira.NewFetcher(client)
+	_ = jira.NewClient(cfg.UserEmail, cfg.APIToken, url)
 	return nil
 }
