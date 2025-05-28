@@ -11,6 +11,7 @@ RUN go build -o /sigrab cmd/sigrab/main.go
 
 # Runtime stage
 FROM alpine:latest
+RUN apk add --no-cache ca-certificates
 
 # Copy the built executable from the builder stage
 COPY --from=builder /sigrab /sigrab
