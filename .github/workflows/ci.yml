@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 env:
   JIRA_API_TOKEN: SUPER_SECRET_TOKEN_FOR_TESTING_ONLY
@@ -40,7 +40,7 @@ jobs:
         run: |
           docker build -t ghcr.io/${{ github.repository_owner }}/sigrab:latest -t ghcr.io/${{ github.repository_owner }}/sigrab:${{ github.sha }} .
       - name: Push Docker image
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
           docker push ghcr.io/${{ github.repository_owner }}/sigrab:latest
           docker push ghcr.io/${{ github.repository_owner }}/sigrab:${{ github.sha }}
