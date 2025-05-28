@@ -47,7 +47,7 @@ func runSigrab(cmd *cobra.Command, args []string) error {
 
 	fetcher := jira.NewFetcher(jira.NewClient(cfg.UserEmail, cfg.APIToken, url))
 
-	err = fetcher.FetchBackward(to, fullPath)
+	_, err = fetcher.FetchBackward(to, fullPath)
 
 	if err != nil {
 		return fmt.Errorf("failed to fetch issues: %w", err)
