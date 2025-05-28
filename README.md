@@ -1,39 +1,29 @@
-# sigrab - Simple Issues Grabber
+# sigrab
 
-`sigrab` connects to your Jira Cloud instance using a URL and the **JIRA_API_TOKEN** environment variable for authentication. It grabs a sequence of issues either forward or backward, depending on your input arguments.
+## Purpose
 
----
+`sigrab` is a command-line tool that fetches Jira issues from a Jira Cloud instance and saves them into a single JSON file. This allows for easy offline access, data backup, or for feeding Jira data into other tools and processes.
 
-## 🧠 Overview
+## Core Functionality
 
-`sigrab` connects to your Jira Cloud instance using a URL and a **required** environment variable for authentication. It grabs a sequence of issues either forward or backward, depending on your input arguments.
+- **Connect to Jira Cloud:** `sigrab` connects to a specified Jira Cloud instance using its URL.
+- **Authentication:** Authentication is handled using a Jira API token. The tool expects the API token to be available in an environment variable named `JIRA_API_TOKEN`.
+- **Fetch Jira Issues:** The tool fetches all accessible Jira issues from the configured instance.
+- **Save Issues to JSON:** All fetched issues are saved in a structured JSON format within a single file.
+- **Output File Naming Convention:** The output file is named using the format `YYYY-MM-DD-HHMM.jira.issues.json`, where `YYYY` is the year, `MM` is the month, `DD` is the day, `HH` is the hour (24-hour format), and `MM` is the minute of when the tool was run. For example, `2023-10-27-1435.jira.issues.json`.
 
----
+## Usage
 
-## 🛠️ Features
+(To be added: Detailed usage instructions, including command-line arguments and examples)
 
-- Connects to **Jira Cloud**
-- Uses a **mandatory** access token from the **JIRA_API_TOKEN** environment variable
-- Grabs issues between two Jira task keys (e.g., `DEV-123` to `DEV-140`)- Supports **forward** and **backward** traversal:
-  - Only `from` specified → fetches forward until the first non-existent task
-  - Only `to` specified → fetches backward until task number 1
-  - Both `from` and `to` specified → fetches in the specified range
-- Saves output as a single JSON file:
-  - File name format: `YYYY-MM-DD-HHMM.jira.issues.json`
+## Setup
 
----
+(To be added: Instructions on how to set up the tool, including how to configure the Jira instance URL and the API token)
 
-## 🚀 Usage
+## Contributing
 
-```bash
-# Set the required token environment variable:
-export JIRA_API_TOKEN="your-jira-api-token"
+(To be added: Guidelines for contributing to the project)
 
-# Run the tool
-sigrab \
-  --url "https://yourcompany.atlassian.net" \
-  --from DEV-123 \
-  --to DEV-140
+## License
 
-# View help and available flags
-sigrab --help
+(To be added: Information about the project's license)
